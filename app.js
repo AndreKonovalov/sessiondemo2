@@ -24,7 +24,9 @@ export default (express, bodyParser, fs) => {
         let str1 = 'str1 ' + r.toString() + '\n'; // 'r ' + JSON.stringify(r) +'\n';
         let str2 = 'res ' + r.res.toString() +'\n';
         log(str1 + str2);
-        alert(r);
+        let obj = { a: "aa", b: "bb" };
+        let strj = 'strj ' + JSON.stringify(obj);
+        log(str3);
 //        delete r.session.name;
         r.res.send(`Очищено!`).send(str1 + str2);  
     })
