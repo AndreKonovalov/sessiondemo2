@@ -11,13 +11,7 @@ const htxt = { 'Content-Type': 'text/plain; charset=utf-8' , ...CORS };
 export default (express, bodyParser, fs) => {
     const app = express();
     app
-    .use((r, res) => { res.set(htxt); })
-//    .use((r, res, next) => {
-//       log('r '); log(Object.keys(r)); log('\n');
-//       log('htxt ' + JSON.stringify(htxt, null, '\t') +'\n');
-//       log('res '); log(Object.keys(res)); log('\n');
-//      r.res.set(htxt) && next();
-//    })
+    .use( (r, res, next) => res.set(htxt) && next() )
     .use(bodyParser.urlencoded({ extended: true }))
   
     .get('/login/', (req, res) => res.send('eliasgoss'))   
@@ -30,7 +24,7 @@ export default (express, bodyParser, fs) => {
         let str3 = 'req ' + Object.keys(r.res.req) +'\n';
         log(str1 + str2 + str3);
 //        delete r.session.name;
-        r.res.send(`Очищено!\n` + str1 + str2);
+        r.res.send(`Очищено!\n` + str1 + str2 + str3);
     })
 //     .get('/profile', protect, r => {
 //         const { name } = r.session;
