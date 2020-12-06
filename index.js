@@ -16,8 +16,8 @@ const User = UserModel(m);
 const app = appSrc(express, bodyParser, fs, User, m, mstore, session);
 
 try {
-    await m.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true });
-    app.listen(process.env.PORT ?? 3000);
+    m.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(app.listen(process.env.PORT ?? 3000));
 } catch(e) {
     console.log(e.codeName);
 }
