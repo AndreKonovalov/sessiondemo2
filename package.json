@@ -6,7 +6,10 @@
   "license": "MIT",
   "repository": "https://github.com/AndreKonovalov/sessiondemo2",
   "scripts": {
-    "start": "node 14.5.0 ."
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "14.5.0"
   },
   "dependencies": {
     "connect-mongo": "^3.2.0",
