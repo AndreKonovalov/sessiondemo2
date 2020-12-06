@@ -4,7 +4,7 @@ export default (x, User) => {
     .route('/')
     .get(async r => r.res.json(await User.find()))
     .post(async r => {
-        const { login, password } = r.query;
+        const { login, password } = r.body;
         const newUser = new User({ login, password });
         try {
             await newUser.save();
