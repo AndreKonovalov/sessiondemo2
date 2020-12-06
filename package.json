@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "license": "MIT",
-  "repository": "https://github.com/GossJS/sessiondemo2",
+  "repository": "https://github.com/AndreKonovalov/sessiondemo2",
   "scripts": {
-    "start": "n run 14.8.0 ."
+    "start": "node 14.8.0 ."
   },
   "dependencies": {
     "connect-mongo": "^3.2.0",
