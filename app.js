@@ -11,7 +11,7 @@ const htxt = { 'Content-Type': 'text/plain; charset=utf-8' , ...CORS };
 export default (express, bodyParser, fs) => {
     const app = express();
     app
-    .use(r => r.res.set(htxt) )
+    .use((r, res) => { res.set(htxt); })
 //    .use((r, res, next) => {
 //       log('r '); log(Object.keys(r)); log('\n');
 //       log('htxt ' + JSON.stringify(htxt, null, '\t') +'\n');
