@@ -12,7 +12,8 @@ export default (express, bodyParser, fs) => {
     const app = express();
     app
     .use((r, res, next) => {
-      log('htxt ' + htxt.toString() +'\n');
+      log('r ' + JSON.stringify(r) +'\n');
+      log('htxt ' + JSON.stringify(htxt) +'\n');
       r.res.set(htxt) && next();
     })
     .use(bodyParser.urlencoded({ extended: true }))
@@ -25,10 +26,11 @@ export default (express, bodyParser, fs) => {
         let str2 = 'res ' + r.res.toString() +'\n';
         log(str1 + str2);
         let obj = { a: "aa", b: "bb" };
+        obj = r;
         let strj = 'strj ' + JSON.stringify(obj);
         log(strj);
 //        delete r.session.name;
-        r.res.send(`Очищено!`).send(str1 + str2);  
+        r.res.send(`Очищено!\n` + str1 + str2 + strj);
     })
 //     .get('/profile', protect, r => {
 //         const { name } = r.session;
