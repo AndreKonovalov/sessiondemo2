@@ -30,8 +30,8 @@ export default (express, bodyParser, fs, User, m, mstore, session) => {
     .get('/user/', async (req, res) => res.json(await User.find()) )
     .get('/user/:login', async (req, res) => {
         const { login } = req.params;
-        res.json(await User.find({ login })) );
-    }
+        res.json(await User.find({ login }));
+    })
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
     .get('/prune', r => {
@@ -42,7 +42,7 @@ export default (express, bodyParser, fs, User, m, mstore, session) => {
         log(str1 + str2 + str3);
         delete r.session.name;
         r.res.send(`Очищено!\n` + str1 + str2 + str3);
-    })
+     })
      .get('/profile', protect, r => {
          const { name } = r.session;
          r.res.send(`Доступ открыт, ${name}!`);
