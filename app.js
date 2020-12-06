@@ -28,6 +28,10 @@ export default (express, bodyParser, fs, User, m, mstore, session) => {
   
     .get('/login/', (req, res) => res.send('eliasgoss'))   
     .get('/user/', async (req, res) => res.json(await User.find()) )
+    .get('/user/:login', async (req, res) => {
+        const { login } = req.params;
+        res.json(await User.find({ login })) );
+    }
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
     .get('/prune', r => {
