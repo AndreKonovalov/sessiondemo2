@@ -8,7 +8,7 @@ const CORS = {
 const hhtml = { 'Content-Type': 'text/html; charset=utf-8' , ...CORS };
 const htxt = { 'Content-Type': 'text/plain; charset=utf-8' , ...CORS };
 
-export default (express, bodyParser, fs, m, mstore, session) => {
+export default (express, bodyParser, fs, User, m, mstore, session) => {
     const app = express();
     const db = m.connection;
     const MongoStore = mstore(session);
@@ -27,6 +27,7 @@ export default (express, bodyParser, fs, m, mstore, session) => {
     }))
   
     .get('/login/', (req, res) => res.send('eliasgoss'))   
+    .get('/user/', async (req, res) => res.json(await User.find()) )
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
     .get('/prune', r => {
