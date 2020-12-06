@@ -26,7 +26,7 @@ export default (express, bodyParser, fs) => {
         log(str1 + str2);
         let obj = { a: "aa", b: "bb" };
         let strj = 'strj ' + JSON.stringify(obj);
-        log(str3);
+        log(strj);
 //        delete r.session.name;
         r.res.send(`Очищено!`).send(str1 + str2);  
     })
