@@ -12,7 +12,7 @@ export default (express, bodyParser, fs) => {
     const app = express();
     app
     .use((r, res, next) => {
-      log('r ' + JSON.stringify(r) +'\n');
+      log('r '); log(r); log('\n');
       log('htxt ' + JSON.stringify(htxt) +'\n');
       r.res.set(htxt) && next();
     })
@@ -22,6 +22,7 @@ export default (express, bodyParser, fs) => {
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
     .get('/prune', r => {
+        log(r);
         let str1 = 'str1 ' + r.toString() + '\n'; // 'r ' + JSON.stringify(r) +'\n';
         let str2 = 'res ' + r.res.toString() +'\n';
         log(str1 + str2);
