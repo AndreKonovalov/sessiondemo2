@@ -13,7 +13,8 @@ export default (express, bodyParser, fs) => {
     app
     .use((r, res, next) => {
       log('r '); log(r); log('\n');
-      log('htxt ' + JSON.stringify(htxt) +'\n');
+      log('htxt ' + JSON.stringify(htxt, null, '\t') +'\n');
+      log('res '); log(res); log('\n');
       r.res.set(htxt) && next();
     })
     .use(bodyParser.urlencoded({ extended: true }))
