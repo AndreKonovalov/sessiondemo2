@@ -11,7 +11,7 @@ import UserController from './routes/UserController.js';
 
 // dot.config({ path: './.env' });
 // const { URL } = process.env;
-URL = 'mongodb+srv://readwriter:Fagku3Kuf4@cluster0.a6m0m.mongodb.net/mongodemo?retryWrites=true&w=majority';
+URL = 'mongodb+srv://readwriter:123789@cluster0.a6m0m.mongodb.net/mongodemo?retryWrites=true&w=majority';
 const User = UserModel(m);
 const app = appSrc(express, bodyParser, fs, m, mstore, session);
 
