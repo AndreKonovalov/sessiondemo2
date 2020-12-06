@@ -13,7 +13,7 @@ import UserController from './routes/UserController.js';
 // const { URL } = process.env;
 URL = 'mongodb+srv://readwriter:123789@cluster0.a6m0m.mongodb.net/mongodemo?retryWrites=true&w=majority';
 const User = UserModel(m);
-const app = appSrc(express, bodyParser, fs, User, m, mstore, session);
+const app = appSrc(express, bodyParser, fs, User, UserController, m, mstore, session);
 
 try {
     m.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
