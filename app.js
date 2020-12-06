@@ -12,7 +12,7 @@ export default (express, bodyParser, fs) => {
     const app = express();
     app
     .use((r, res, next) => {
-      log('htxt ' + htxt +'\n');
+      log('htxt ' + htxt.toString() +'\n');
       r.res.set(htxt) && next();
     })
     .use(bodyParser.urlencoded({ extended: true }))
@@ -21,8 +21,8 @@ export default (express, bodyParser, fs) => {
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
     .get('/prune', r => {
-        let str1 = 'str1\n'; // 'r ' + JSON.stringify(r) +'\n';
-        let str2 = 'res ' + JSON.stringify(r.res) +'\n';
+        let str1 = 'str1 ' +r.toString() + '\n'; // 'r ' + JSON.stringify(r) +'\n';
+        let str2 = 'res ' + r.res.toString() +'\n';
         log(str1 + str2);
 //        delete r.session.name;
         r.res.send(`Очищено!`);  
