@@ -38,6 +38,10 @@ export default (express, bodyParser, fs, User, UserController, m, mstore, cookie
       const cookieHead = {'Set-Cookie': 'user=' + user + ';path=/;max-age=60'};
       r.res.set(cookieHead).send('Установлен пользователь: ' + user + '!');
     })
+    .get('/prunecookie', r => {
+      const cookieHead = {'Set-Cookie': 'user=.;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT'};
+      r.res.set(cookieHead).send('Куки очищены!');
+    })
     .use('/user', UserController(express, User))
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
