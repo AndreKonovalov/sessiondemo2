@@ -33,6 +33,11 @@ export default (express, bodyParser, fs, User, UserController, m, mstore, cookie
 //      r.res.send('Найден пользователь: ${user}');
       r.res.send('Найден пользователь: ' + user);
     })
+    .get('/setcookie/:user', r => {
+      const { user } = r.params;
+      const cookieHead = {'Set-Cookie': 'user=' + user + ';path=/;max-age=60'};
+      r.res.set(cookieHead).send('Установлен пользователь: ' + user + '!');
+    })
     .use('/user', UserController(express, User))
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
