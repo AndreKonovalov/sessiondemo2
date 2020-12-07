@@ -30,7 +30,8 @@ export default (express, bodyParser, fs, User, UserController, m, mstore, cookie
     .get('/login/', (req, res) => res.send('eliasgoss'))
     .get('/cookie', r => {
       const { user } = r.cookies;
-      r.res.send('Найден пользователь: ${user}');
+//      r.res.send('Найден пользователь: ${user}');
+      r.res.send('Найден пользователь: ' + user);
     })
     .use('/user', UserController(express, User))
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
