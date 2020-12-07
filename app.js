@@ -8,7 +8,7 @@ const CORS = {
 const hhtml = { 'Content-Type': 'text/html; charset=utf-8' , ...CORS };
 const htxt = { 'Content-Type': 'text/plain; charset=utf-8' , ...CORS };
 
-export default (express, bodyParser, fs, User, UserController, m, mstore, session) => {
+export default (express, bodyParser, fs, User, UserController, m, mstore, cookieParser, session) => {
     const app = express();
     const db = m.connection;
     const MongoStore = mstore(session);
@@ -19,6 +19,7 @@ export default (express, bodyParser, fs, User, UserController, m, mstore, sessio
     app
     .use( (r, res, next) => res.set(htxt) && next() )
     .use(bodyParser.urlencoded({ extended: true }))
+    .use(cookieParser())
     .use(session({ 
         secret: 'mysecret', 
         resave: true, 
@@ -26,7 +27,11 @@ export default (express, bodyParser, fs, User, UserController, m, mstore, sessio
         store: new MongoStore({ mongooseConnection: db }) 
     }))
   
-    .get('/login/', (req, res) => res.send('eliasgoss'))   
+    .get('/login/', (req, res) => res.send('eliasgoss'))
+    .get('/cookie', r => {
+      const { user } = r.cookies;
+      r.res.send('Найден пользователь: ${user}');
+    })
     .use('/user', UserController(express, User))
     .get('/code/', (req, res) => fs.createReadStream(import.meta.url.substring(7)).pipe(res))
     .get('/denied', r => r.res.status(403).send('Доступ запрещён'))
